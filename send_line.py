@@ -1,7 +1,6 @@
 import os
 import requests
 
-# 從 GitHub Secrets 讀取變數
 CHANNEL_ACCESS_TOKEN = os.getenv('LINE_CHANNEL_ACCESS_TOKEN')
 USER_ID = os.getenv('LINE_USER_ID')
 
@@ -12,13 +11,12 @@ def send_line_message():
         "Content-Type": "application/json"
     }
     
-    # 你的會議通知訊息
-    message = """
-【會議通知】
+    message = 
+"""【會議通知】
 【醫療無人機中心 核心會議】
 會議時間：每週二上午10:00
 會議地點：五期B1急診會議室
-
+"""
     
     payload = {
         "to": USER_ID,
