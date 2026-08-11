@@ -11,12 +11,11 @@ def send_line_message():
         "Content-Type": "application/json"
     }
     
-    message = 
-"""【會議通知】
+    message = """【會議通知】
 【醫療無人機中心 核心會議】
 會議時間：每週二上午10:00
 會議地點：五期B1急診會議室
-"""
+出席成員：王曉明"""
     
     payload = {
         "to": USER_ID,
