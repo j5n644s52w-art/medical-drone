@@ -1,0 +1,31 @@
+name: 醫療無人機會議通知排程
+
+on:
+  schedule:
+    # 這裡就是設定時間的地方！
+    # GitHub 使用 UTC 時間，台灣時間早上 10:00 等於 UTC 時間 02:00
+    # '0 2 * * 2' 的意思是：每週二 (星期2) 的 02:00 (UTC) 執行
+    - cron: '0 2 * * 2'
+  workflow_dispatch: # 這個設定讓你可以隨時手動點擊按鈕測試
+
+jobs:
+  send-message:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 取得程式碼
+        uses: actions/checkout@v3
+
+      - name: 設定 Python 環境
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: 安裝 requests 套件
+        run: pip install requests
+
+      - name: 執行發送腳本
+        env:
+          # 這裡會自動去保險箱拿你剛剛存的兩把鑰匙
+          LINE_CHANNEL_ACCESS_TOKEN: ${{ secrets.LINE_CHANNEL_ACCESS_TOKEN }}
+          LINE_USER_ID: ${{ secrets.LINE_USER_ID }}
+        run: python send_line.py
